@@ -245,7 +245,7 @@ async function procesarIA(){
   try{
     const res=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
-      headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01'},
+      headers:{'Content-Type':'application/json','x-api-key':API_KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
       body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,messages:[{role:'user',content:`Sos un asistente para presupuestos de plomería en Argentina. El plomero describió: "${txt}". Extraé todos los ítems y devolvé SOLO un JSON válido (sin backticks ni texto extra) con este formato: [{"descripcion":"texto","cantidad":1,"unidad":"unidad","precio":0}]. Precios como números sin símbolo $. Separar materiales de mano de obra si se menciona.`}]})
     });
     const data=await res.json();
